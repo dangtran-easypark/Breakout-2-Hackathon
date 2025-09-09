@@ -6,10 +6,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "vite --port 5000 --open",
-    "dev": "vite --port 5000 --open",
+    "start": "vite --port 5173 --open",
+    "dev": "vite --port 5173 --open",
     "build": "vite build",
-    "serve": "vite preview --port 5000",
+    "serve": "vite preview --port 5173",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
     "type-check": "tsc"
   },
