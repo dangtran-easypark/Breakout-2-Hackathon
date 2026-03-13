@@ -17,6 +17,7 @@ export default defineConfig({
   ],
   server: {
     port: parseInt(process.env.FRONTEND_PORT || '5000'),
+    host: true,
   },
   build: {
     cssCodeSplit: true,

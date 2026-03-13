@@ -47,6 +47,6 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Backend server running at http://localhost:${port}`);
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Backend server running at http://0.0.0.0:${port}`);
 }); 
