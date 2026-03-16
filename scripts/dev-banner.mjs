@@ -1,6 +1,9 @@
 import http from 'node:http';
 import os from 'node:os';
 
+// Ignore SIGPIPE — concurrently can close our stdout pipe
+process.on('SIGPIPE', () => {});
+
 const BACKEND_PORT = process.env.BACKEND_PORT || '5001';
 const FRONTEND_PORT = process.env.FRONTEND_PORT || '5000';
 const POLL_INTERVAL = 500;
