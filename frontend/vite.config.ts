@@ -15,6 +15,11 @@ export default defineConfig({
       protocolImports: true,
     }),
   ],
+  server: {
+    port: parseInt(process.env.FRONTEND_PORT || '5173'),
+    strictPort: true,
+    host: true,
+  },
   build: {
     cssCodeSplit: true,
     chunkSizeWarningLimit: 3000,

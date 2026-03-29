@@ -1,0 +1,113 @@
+{
+  "title": "AI-Assisted Development Practical",
+  "description": "Hands-on exercises for AI-assisted full-stack development using Claude Code with a React + Express + Prisma monorepo",
+  "version": "1.0",
+  "ports": [
+    { "env": "FRONTEND_PORT", "description": "Vite dev server port" },
+    { "env": "BACKEND_PORT", "description": "Express server port" }
+  ],
+  "urls": [
+    { "env": "VITE_API_BASE_URL", "port": "BACKEND_PORT", "path": "/api" },
+    { "env": "FRONTEND_URL", "port": "FRONTEND_PORT" }
+  ],
+  "setup": {
+    "install": "npm install && npm run db:migrate:dev -w backend && npm run db:seed -w backend",
+    "env": {
+      "FRONTEND_PORT": "Vite dev server port (default: 5173)",
+      "BACKEND_PORT": "Express server port (default: 5001)",
+      "VITE_API_BASE_URL": "Frontend→backend API URL (default: http://localhost:5001/api)",
+      "FRONTEND_URL": "Backend CORS origin for frontend (default: http://localhost:5173)"
+    },
+    "requiredTools": [
+      "node",
+      "claude"
+    ],
+    "shell": {
+      "command": "claude",
+      "services": [
+        {
+          "name": "dev-server",
+          "command": "npm run dev"
+        }
+      ]
+    }
+  },
+  "exercises": [
+    {
+      "id": "01-task-list",
+      "title": "Task List CRUD",
+      "description": "Complete a task management interface by wiring up create, update, and delete operations using AI assistance. The read functionality and backend API are already built.",
+      "directory": ".",
+      "steps": [
+        {
+          "title": "Explore the codebase",
+          "instruction": "Ask Claude: 'Explain how the task list exercise works — walk me through the frontend component, the API routes, and the database model'"
+        },
+        {
+          "title": "Connect the New Task button",
+          "instruction": "Ask Claude to help you connect the 'New Task' button in the ExerciseTaskList component to the existing POST /api/exercises/tasks endpoint, including a form for task name, description, and priority"
+        },
+        {
+          "title": "Implement task status updates",
+          "instruction": "Ask Claude to add the ability to toggle task status (e.g., mark as complete) by calling the PUT /api/exercises/tasks/:id endpoint"
+        },
+        {
+          "title": "Implement task deletion",
+          "instruction": "Ask Claude to add a delete button to each task row that calls the DELETE /api/exercises/tasks/:id endpoint with a confirmation dialog"
+        },
+        {
+          "title": "Add task editing",
+          "instruction": "Ask Claude to replace the 'View' button with an 'Edit' button that opens an inline form or modal for editing task details via the PUT endpoint"
+        }
+      ]
+    },
+    {
+      "id": "02-analytics-chart",
+      "title": "Analytics Chart",
+      "description": "Fetch monthly analytics data from the backend API and visualize it using a charting library. You'll need to discover the API endpoint and choose how to display the data — all with AI assistance.",
+      "directory": ".",
+      "steps": [
+        {
+          "title": "Discover the API",
+          "instruction": "Ask Claude: 'I need to display analytics data in the AnalyticsChart exercise. Can you find the backend API endpoint that serves monthly analytics data and explain what data it returns?'"
+        },
+        {
+          "title": "Fetch the data",
+          "instruction": "Ask Claude to add a useEffect hook to the AnalyticsChartExercise component that fetches the analytics data from the API endpoint and stores it in state"
+        },
+        {
+          "title": "Render the chart",
+          "instruction": "Ask Claude: 'Look at the example charts in the Example Layouts section of this app and help me implement a similar chart in the AnalyticsChartExercise component to display page views and total visits over time'"
+        },
+        {
+          "title": "Enhance the visualisation",
+          "instruction": "Ask Claude to improve the chart with additional metrics, better formatting, or interactive features like tooltips and legends"
+        }
+      ]
+    },
+    {
+      "id": "03-llm-query",
+      "title": "LLM Integration",
+      "description": "Build a full-stack LLM query interface — create a backend API endpoint that calls an LLM provider, wire it to the frontend form, and add model selection. This exercise covers API design, SDK integration, and UI development.",
+      "directory": ".",
+      "steps": [
+        {
+          "title": "Plan the implementation",
+          "instruction": "Ask Claude: 'I need to implement the LLM Query exercise. Look at the existing LlmQuery component and help me create a plan for building the backend endpoint and connecting it to the frontend'"
+        },
+        {
+          "title": "Create the backend endpoint",
+          "instruction": "Ask Claude to create a new API endpoint at POST /api/llm/query that accepts a user query, calls an LLM provider (e.g., Anthropic Claude API), and returns the response. Follow the existing backend patterns for routes, controllers, and services"
+        },
+        {
+          "title": "Connect the frontend",
+          "instruction": "Ask Claude to update the handleSubmit function in the LlmQuery component to call your new backend endpoint and display the LLM's response below the form, including loading and error states"
+        },
+        {
+          "title": "Add model selection",
+          "instruction": "Ask Claude to add a dropdown to the LLM Query UI that lets the user select which model to use, and pass that selection to the backend endpoint"
+        }
+      ]
+    }
+  ]
+}
