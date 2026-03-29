@@ -27,7 +27,7 @@ This guide will help you get the project up and running quickly.
 
 Before you begin, ensure you have the following installed:
 
-*   **Node.js:** (Check `.nvmrc` or root `package.json` `engines` field if specified for a recommended version). We recommend using [nvm](https://github.com/nvm-sh/nvm) to manage Node versions.
+*   **Node.js:** Version 18 or higher. We recommend using [nvm](https://github.com/nvm-sh/nvm) to manage Node versions.
 *   **npm:** (Usually comes with Node.js)
 
 ## Setup Steps

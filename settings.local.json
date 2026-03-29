@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:*)",
+      "Bash(rg:*)",
+      "Bash(git checkout:*)",
+      "Bash(find:*)",
+      "Bash(mv:*)",
+      "Bash(git add:*)",
+      "Bash(git reset:*)",
+      "Bash(grep:*)",
+      "Bash(git commit:*)",
+      "Bash(pkill:*)",
+      "Bash(./.vscode/build-and-link.sh:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(rm:*)",
+      "Bash(swift build)",
+      "WebFetch(domain:developers.klaviyo.com)",
+      "WebFetch(domain:help.klaviyo.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(php admin/cron/test-klaviyo-consultation-sync.php:*)",
+      "Bash(git push:*)",
+      "Bash(gh pr comment:*)",
+      "Bash(ls:*)"
+    ],
+    "deny": [
+      "Bash(**/rm)",
+      "Bash(**/rmdir)",
+      "Bash(**/rm -rf)",
+      "Bash(**/unlink)",
+      "Bash(**rm**)",
+      "Bash(**delete**)",
+      "Bash(**remove**)"
+    ],
+    "defaultMode": "bypassPermissions"
+  },
+  "enableAllProjectMcpServers": true,
+  "additionalDirectories": [
+    "/Users/roja/Documents/Code"
+  ]
+}
