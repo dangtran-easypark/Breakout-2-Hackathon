@@ -189,7 +189,7 @@ const ExerciseTaskList = () => {
               <p className="mb-1">
                 While the read functionality is complete, there are still features 
                 to implement as outlined in the project plan (
-                <a href="/docs/plans/01-Task-Exercise-API.md" target="_blank" rel="noopener noreferrer"><code>docs/plans/01-Task-Exercise-API.md</code></a>).
+                <a href="/docs/plans/01-Task-Example-API.md" target="_blank" rel="noopener noreferrer"><code>docs/plans/01-Task-Example-API.md</code></a>).
                 Your next steps are to implement the following, using AI assistance:
               </p>
               <ul>
