@@ -1,6 +1,6 @@
 import React, { Suspense, ReactNode } from "react";
 import { Outlet } from "react-router-dom";
-import { Home, List, Car, PieChart } from "lucide-react";
+import { Home, List, Car, PieChart, Zap } from "lucide-react";
 
 import Wrapper from "../components/Wrapper";
 import Sidebar from "../components/sidebar/Sidebar";
@@ -22,11 +22,6 @@ const sidebarNavigation: { title: string; pages: SidebarItemsType[] }[] = [
         icon: Home,
         title: "Start Here",
       },
-    ],
-  },
-  {
-    title: "Exercises",
-    pages: [
       {
         href: "/exercises/tasks/list",
         title: "Task List Exercise",
@@ -41,6 +36,11 @@ const sidebarNavigation: { title: string; pages: SidebarItemsType[] }[] = [
         href: "/exercises/analytics-chart",
         title: "Analytics Charts Exercise",
         icon: PieChart,
+      },
+      {
+        href: "/exercises/stretch",
+        title: "Stretch Exercise",
+        icon: Zap,
       },
     ],
   },

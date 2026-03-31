@@ -35,6 +35,9 @@ const ParkingAvailabilityExercise = lazy(
 const AnalyticsChartExercise = lazy(
   () => import("./pages/exercises/analytics/AnalyticsChart")
 );
+const StretchExercise = lazy(
+  () => import("./pages/exercises/stretch/StretchExercise")
+);
 
 // Apps
 const Calendar = lazy(() => import("./pages/apps/Calendar"));
@@ -169,6 +172,10 @@ const routes = [
       {
         path: "analytics-chart",
         element: <AnalyticsChartExercise />,
+      },
+      {
+        path: "stretch",
+        element: <StretchExercise />,
       },
     ],
   },
