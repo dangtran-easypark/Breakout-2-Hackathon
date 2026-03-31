@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Container, Row, Col, Alert, Card } from 'react-bootstrap';
-import { Copy } from 'lucide-react';
+import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Copy, Sparkles } from 'lucide-react';
 
 const promptBlockStyle: React.CSSProperties = {
   background: '#f8f9fa',
@@ -13,15 +13,25 @@ const promptBlockStyle: React.CSSProperties = {
   cursor: 'pointer',
 };
 
-const CopyablePrompt = ({ children }: { children: string }) => {
+const RevealablePrompt = ({ children }: { children: string }) => {
+  const [revealed, setRevealed] = useState(false);
   const [copied, setCopied] = useState(false);
   const handleCopy = () => {
     navigator.clipboard.writeText(children);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  if (!revealed) {
+    return (
+      <a href="#" className="small" onClick={(e) => { e.preventDefault(); setRevealed(true); }}>
+        <Sparkles size={14} className="me-1" />show me an example prompt
+      </a>
+    );
+  }
+
   return (
-    <div style={promptBlockStyle} onClick={handleCopy} title="Click to copy">
+    <div style={promptBlockStyle} onClick={handleCopy} title="Click to copy" className="mt-1">
       <div className="d-flex justify-content-between align-items-start gap-2">
         <span>{children}</span>
         <span className="text-muted flex-shrink-0" style={{ fontSize: '0.75rem' }}>
@@ -61,20 +71,31 @@ const AnalyticsChartExercise = () => {
               </div>
 
               <div className="rounded p-3 mb-3" style={{ background: '#d1e7dd' }}>
-                <strong>How it works:</strong> Copy each task below (click the block to copy) and
-                paste it into Claude. After each task, refresh this page to see your changes.
+                <strong>How it works:</strong> Try each task yourself first by describing what you
+                want to Claude. If you get stuck, click "show me an example prompt" for a
+                ready-made prompt you can copy and paste. After each task, refresh this page to
+                see your changes.
+              </div>
+
+              <div className="rounded p-3 mb-3" style={{ background: '#cfe2ff' }}>
+                <strong>What you'll learn:</strong> AI isn't just a code generator — it's an
+                explorer. You can point it at an unfamiliar codebase and ask "what's here?" before
+                deciding what to build. It can also choose and integrate tools (like charting
+                libraries) on your behalf — you describe the result, it makes the technical decisions.
               </div>
 
               <h6 className="mb-3">Tasks</h6>
 
               <div className="mb-3">
                 <div className="fw-semibold mb-1">1. Find the Data</div>
-                <CopyablePrompt>Look at the backend code in this project and find the API endpoint that serves monthly analytics data. Tell me what endpoint it is and what data it returns.</CopyablePrompt>
+                <div className="mb-1">There is an API endpoint somewhere in the backend that serves monthly analytics data. Ask your AI assistant to find it and tell you what data is available.</div>
+                <RevealablePrompt>Search through this project's backend code and find the API endpoint that serves monthly analytics data. Tell me what the endpoint is and what fields the data contains.</RevealablePrompt>
               </div>
 
               <div className="mb-0">
                 <div className="fw-semibold mb-1">2. Build the Chart</div>
-                <CopyablePrompt>On the AnalyticsChart page (frontend/src/pages/exercises/analytics/AnalyticsChart.tsx), fetch the monthly analytics data from the backend API endpoint you found. Choose an appropriate charting library, install it, and display the data as a line chart showing Page Views and Total Visits over time. Make it look good.</CopyablePrompt>
+                <div className="mb-1">Once you know where the data is, display it as a chart on this page. You can choose which metrics to display (e.g. page views and total visits over time).</div>
+                <RevealablePrompt>On the analytics chart page, replace the placeholder with a chart that fetches the monthly analytics data and displays page views and total visits over time. Pick a suitable charting library and make it look good.</RevealablePrompt>
               </div>
 
               <p className="text-muted mt-3 mb-0" style={{ fontSize: '0.85rem' }}>

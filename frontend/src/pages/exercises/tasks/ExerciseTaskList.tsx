@@ -11,7 +11,7 @@ import {
   Spinner,
   Alert,
 } from "react-bootstrap";
-import { Plus, Copy } from "lucide-react";
+import { Plus, Copy, Sparkles } from "lucide-react";
 
 // Import backend types (adjust path if needed, or define locally/shared)
 // Assuming types might be manually defined or generated elsewhere if not directly importable
@@ -63,15 +63,25 @@ const promptBlockStyle: React.CSSProperties = {
   cursor: 'pointer',
 };
 
-const CopyablePrompt = ({ children }: { children: string }) => {
+const RevealablePrompt = ({ children }: { children: string }) => {
+  const [revealed, setRevealed] = useState(false);
   const [copied, setCopied] = useState(false);
   const handleCopy = () => {
     navigator.clipboard.writeText(children);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  if (!revealed) {
+    return (
+      <a href="#" className="small" onClick={(e) => { e.preventDefault(); setRevealed(true); }}>
+        <Sparkles size={14} className="me-1" />show me an example prompt
+      </a>
+    );
+  }
+
   return (
-    <div style={promptBlockStyle} onClick={handleCopy} title="Click to copy">
+    <div style={promptBlockStyle} onClick={handleCopy} title="Click to copy" className="mt-1">
       <div className="d-flex justify-content-between align-items-start gap-2">
         <span>{children}</span>
         <span className="text-muted flex-shrink-0" style={{ fontSize: '0.75rem' }}>
@@ -215,31 +225,42 @@ const ExerciseTaskList = () => {
               </div>
 
               <div className="rounded p-3 mb-3" style={{ background: '#d1e7dd' }}>
-                <strong>How it works:</strong> Copy each task below (click the block to copy) and
-                paste it into Claude. Claude will make the code changes for you. After each task,
-                refresh this page to see your changes.
+                <strong>How it works:</strong> Try each task yourself first by describing what you
+                want to Claude. If you get stuck, click "show me an example prompt" for a
+                ready-made prompt you can copy and paste. After each task, refresh this page to
+                see your changes.
+              </div>
+
+              <div className="rounded p-3 mb-3" style={{ background: '#cfe2ff' }}>
+                <strong>What you'll learn:</strong> You can extend and modify an application you've
+                never seen before, without reading the code. Describe the change you want and the
+                AI figures out where and how to make it happen in the existing codebase.
               </div>
 
               <h6 className="mb-3">Tasks</h6>
 
               <div className="mb-3">
                 <div className="fw-semibold mb-1">1. Create Tasks</div>
-                <CopyablePrompt>Connect the 'New Task' button to the POST endpoint so users can create new tasks. The backend API already supports POST to /api/exercises/tasks.</CopyablePrompt>
+                <div className="mb-1">Connect the "New Task" button to the backend so users can create new tasks.</div>
+                <RevealablePrompt>Look at how the task list page works and how it fetches data. Make the "New Task" button open a form where I can enter a name, description, priority and status, then save it to the database and refresh the list.</RevealablePrompt>
               </div>
 
               <div className="mb-3">
                 <div className="fw-semibold mb-1">2. Update Task Status</div>
-                <CopyablePrompt>Add a checkbox or button to each task that lets users mark it as complete or incomplete by calling PUT /api/exercises/tasks/:id with a status update.</CopyablePrompt>
+                <div className="mb-1">Implement functionality to update task status (mark complete/incomplete).</div>
+                <RevealablePrompt>Add a checkbox to each row in the task tables that marks a task as complete or incomplete. Look at the existing API to find how to update a task, and refresh the list after changing it.</RevealablePrompt>
               </div>
 
               <div className="mb-3">
                 <div className="fw-semibold mb-1">3. Delete Tasks</div>
-                <CopyablePrompt>Add a delete button to each task that removes it by calling DELETE /api/exercises/tasks/:id. Show a confirmation before deleting.</CopyablePrompt>
+                <div className="mb-1">Implement functionality to delete tasks.</div>
+                <RevealablePrompt>Add a delete button to the actions column of each task row. It should confirm with the user first, then remove the task and refresh the list.</RevealablePrompt>
               </div>
 
               <div className="mb-0">
                 <div className="fw-semibold mb-1">4. Edit Tasks</div>
-                <CopyablePrompt>Replace the 'View' button with an 'Edit' button that opens a form to edit the task name, description, and priority, then saves via PUT /api/exercises/tasks/:id.</CopyablePrompt>
+                <div className="mb-1">Replace the "View" button with an "Edit" button and implement task editing functionality.</div>
+                <RevealablePrompt>Replace the "View" button in each task row with an "Edit" button. When clicked, it should open a form pre-filled with the task's current details so I can change and save them.</RevealablePrompt>
               </div>
 
               <p className="text-muted mt-3 mb-0" style={{ fontSize: '0.85rem' }}>

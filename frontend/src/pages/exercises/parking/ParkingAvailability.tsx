@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Container, Row, Col, Card, Alert } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell } from '@fortawesome/free-regular-svg-icons';
-import { Copy } from 'lucide-react';
+import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Copy, Sparkles } from 'lucide-react';
 
 const promptBlockStyle: React.CSSProperties = {
   background: '#f8f9fa',
@@ -13,18 +11,27 @@ const promptBlockStyle: React.CSSProperties = {
   fontSize: '0.9rem',
   lineHeight: '1.5',
   cursor: 'pointer',
-  position: 'relative',
 };
 
-const CopyablePrompt = ({ children }: { children: string }) => {
+const RevealablePrompt = ({ children }: { children: string }) => {
+  const [revealed, setRevealed] = useState(false);
   const [copied, setCopied] = useState(false);
   const handleCopy = () => {
     navigator.clipboard.writeText(children);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  if (!revealed) {
+    return (
+      <a href="#" className="small" onClick={(e) => { e.preventDefault(); setRevealed(true); }}>
+        <Sparkles size={14} className="me-1" />show me an example prompt
+      </a>
+    );
+  }
+
   return (
-    <div style={promptBlockStyle} onClick={handleCopy} title="Click to copy">
+    <div style={promptBlockStyle} onClick={handleCopy} title="Click to copy" className="mt-1">
       <div className="d-flex justify-content-between align-items-start gap-2">
         <span>{children}</span>
         <span className="text-muted flex-shrink-0" style={{ fontSize: '0.75rem' }}>
@@ -64,31 +71,43 @@ const ParkingAvailability = () => {
               </div>
 
               <div className="rounded p-3 mb-3" style={{ background: '#d1e7dd' }}>
-                <strong>How it works:</strong> Copy each task below (click the block to copy) and
-                paste it into Claude. Wait for Claude to finish, then move to the next task.
-                After tasks 3 and 4, refresh this page to see your changes.
+                <strong>How it works:</strong> Try each task yourself first by describing what you
+                want to Claude. If you get stuck, click "show me an example prompt" for a
+                ready-made prompt you can copy and paste. After tasks 3 and 4, refresh this page
+                to see your changes.
+              </div>
+
+              <div className="rounded p-3 mb-3" style={{ background: '#cfe2ff' }}>
+                <strong>What you'll learn:</strong> You can build a complete feature from scratch —
+                database, API, and user interface — just by describing what you want the system to
+                do. The AI designs the data model, follows the project's existing conventions, and
+                creates the UI from your description. You don't need to know the technology.
               </div>
 
               <h6 className="mb-3">Tasks</h6>
 
               <div className="mb-3">
                 <div className="fw-semibold mb-1">1. Database Model</div>
-                <CopyablePrompt>Create a database model for a car park system. I need a ParkingZone table (with name and description) and a ParkingBay table (with bay number and status of either AVAILABLE or OCCUPIED, linked to a zone). Create the Prisma schema, run the migration, and seed the database with 3 zones: Zone A (10 bays), Zone B (8 bays), Zone C (12 bays). All bays should start as AVAILABLE. Follow the same patterns as the existing ExampleTask model.</CopyablePrompt>
+                <div className="mb-1">Design and create the database for parking zones and bays. Each bay belongs to a zone and has a status (available or occupied). Seed it with sample data (e.g. 3 zones with 10 bays each).</div>
+                <RevealablePrompt>Look at the existing database models in this project for reference. Set up a database for a car park with parking zones (each with a name) and parking bays (each belonging to a zone, with a bay number and a status of available or occupied). Seed it with 3 zones with about 10 bays each, all starting as available.</RevealablePrompt>
               </div>
 
               <div className="mb-3">
                 <div className="fw-semibold mb-1">2. Backend API</div>
-                <CopyablePrompt>Create backend API endpoints for the car park system. I need: GET /api/parking to list all zones with their total bays and available bays count; GET /api/parking/:zoneId/bays to list all bays in a zone; POST /api/parking/:zoneId/bays/:bayId/book to mark a bay as occupied; POST /api/parking/:zoneId/bays/:bayId/release to mark a bay as available. Follow the same repository/service/controller/routes pattern as the existing exercise task API. Mount the routes in app.ts.</CopyablePrompt>
+                <div className="mb-1">Create API endpoints to retrieve all zones with their availability, retrieve bays for a specific zone, book a bay, and release a bay.</div>
+                <RevealablePrompt>Look at how the existing task API is structured and follow the same patterns. Create API endpoints for the car park so I can: get all zones with how many bays are available; get the bays for a specific zone; book a bay; and release a bay.</RevealablePrompt>
               </div>
 
               <div className="mb-3">
                 <div className="fw-semibold mb-1">3. Availability Dashboard</div>
-                <CopyablePrompt>Build the frontend UI for the car park availability dashboard on the ParkingAvailability page (frontend/src/pages/exercises/parking/ParkingAvailability.tsx). Fetch zones from GET /api/parking and display each zone as a card showing the zone name, how many bays are available out of the total, and a progress bar. Colour-code the cards: green if more than 50% available, amber if 20-50% available, red if less than 20% available. Use the same patterns as ExerciseTaskList.tsx.</CopyablePrompt>
+                <div className="mb-1">Build the frontend UI on this page. Display each zone as a card showing the zone name, total bays, and how many are available. Use colour coding to indicate availability (e.g. green for mostly free, amber for filling up, red for nearly full).</div>
+                <RevealablePrompt>On the car park page, replace the placeholder card with a dashboard that shows each zone as a card. Each card should display the zone name, how many bays are free, and be colour-coded — green when mostly free, amber when filling up, red when nearly full.</RevealablePrompt>
               </div>
 
               <div className="mb-3">
                 <div className="fw-semibold mb-1">4. Bay Management</div>
-                <CopyablePrompt>Add bay management to the car park page. When a user clicks on a zone card, show the individual bays for that zone. Display each bay with its number, a colour indicator (green for available, red for occupied), and a button to book or release it. Add a "Back to zones" button. When a bay is booked or released, update the display. Use the existing API endpoints.</CopyablePrompt>
+                <div className="mb-1">Allow users to click into a zone to see individual bays. Each bay should show its status and have a button to book or release it.</div>
+                <RevealablePrompt>When I click on a zone card, replace the zone overview with a view of the individual bays. Each bay should show whether it's free or taken and have a button to book or release it. Add a way to go back to the zone overview.</RevealablePrompt>
               </div>
 
               <hr />
@@ -97,17 +116,17 @@ const ParkingAvailability = () => {
 
               <div className="mb-3">
                 <div className="fw-semibold mb-1">5. Visual Bay Map</div>
-                <CopyablePrompt>Replace the bay list with a visual car park map. Render bays as coloured squares arranged in two rows facing a central driving lane, like a real car park from above. Green squares for available, red for occupied. Click a square to book or release it.</CopyablePrompt>
+                <div className="mb-1">Replace the bay list with a visual floorplan-style layout — render bays as coloured squares in a grid that resembles an actual car park. Click a square to book or release.</div>
               </div>
 
               <div className="mb-3">
                 <div className="fw-semibold mb-1">6. Live Updates</div>
-                <CopyablePrompt>Add live polling so the car park dashboard automatically refreshes every 5 seconds without needing to reload the page. This way multiple users can see each other's bookings appear in real time. Show a "Last updated" timestamp.</CopyablePrompt>
+                <div className="mb-1">Add automatic polling (e.g. every 5 seconds) so the dashboard refreshes without a page reload. Multiple users should be able to see each other's bookings appear in real time.</div>
               </div>
 
               <div className="mb-0">
                 <div className="fw-semibold mb-1">7. Booking Details</div>
-                <CopyablePrompt>When booking a bay, show a popup form asking for the driver's name and vehicle registration number. Display this information on occupied bays. Add a search bar at the top of the page that lets you search for a vehicle by name or registration across all zones.</CopyablePrompt>
+                <div className="mb-1">When booking a bay, prompt for a driver name and vehicle registration. Display this information on occupied bays and add a search feature to find a vehicle across all zones.</div>
               </div>
             </Card.Body>
           </Card>
