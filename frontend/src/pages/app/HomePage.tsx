@@ -1,23 +1,18 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Container, Row, Col, Card, Badge } from 'react-bootstrap';
+import { Container, Card, Badge, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { List, Car, PieChart, CheckCircle, Circle } from 'lucide-react';
-
-interface ExerciseTask {
-  label: string;
-  done: boolean;
-}
+import { List, Car, PieChart, Zap } from 'lucide-react';
 
 interface Exercise {
   number: number;
   title: string;
   description: string;
+  learning: string;
   href: string;
   icon: React.ReactNode;
   difficulty: string;
   difficultyVariant: string;
-  tasks: ExerciseTask[];
 }
 
 const exercises: Exercise[] = [
@@ -25,58 +20,53 @@ const exercises: Exercise[] = [
     number: 1,
     title: 'Task List',
     description:
-      'A task management UI is connected to a backend API with read functionality already working. Your job is to implement the remaining CRUD operations using AI assistance.',
+      'A task management UI is already connected to a backend API with read functionality working. Your job is to add the missing features.',
+    learning:
+      'You can extend and modify an application you\'ve never seen before, without reading the code. Describe the change you want and the AI figures out where and how to make it happen.',
     href: '/exercises/tasks/list',
     icon: <List size={24} />,
     difficulty: 'Beginner',
     difficultyVariant: 'success',
-    tasks: [
-      { label: "Connect the 'New Task' button to the POST endpoint", done: false },
-      { label: 'Implement task status updates (complete/incomplete) via PUT', done: false },
-      { label: 'Implement task deletion via DELETE', done: false },
-      { label: "Replace the 'View' button with 'Edit' functionality", done: false },
-    ],
   },
   {
     number: 2,
     title: 'Car Park Availability',
     description:
-      'Build a full-stack car park availability system from scratch. Design the database, create the API, and build a dashboard showing zone availability with the ability to book and release bays.',
+      'Build a complete car park availability system from scratch — database, API, and user interface. There is nothing set up yet.',
+    learning:
+      'You can build an entire feature from nothing by describing what you want the system to do. The AI designs the data model, follows the project\'s conventions, and creates the UI from your description.',
     href: '/exercises/parking',
     icon: <Car size={24} />,
     difficulty: 'Intermediate',
     difficultyVariant: 'warning',
-    tasks: [
-      { label: 'Design the database schema and seed with sample data', done: false },
-      { label: 'Create backend API endpoints for zones and bays', done: false },
-      { label: 'Build an availability dashboard with colour-coded zones', done: false },
-      { label: 'Add bay management — book and release individual bays', done: false },
-      { label: 'Bonus: Visual bay map (floorplan-style layout)', done: false },
-      { label: 'Bonus: Live polling updates across users', done: false },
-      { label: 'Bonus: Booking details with driver name and vehicle search', done: false },
-    ],
   },
   {
     number: 3,
     title: 'Analytics Chart',
     description:
-      'Fetch analytics data from a backend endpoint and visualise it with a charting library. You will need to discover the API yourself using AI, then build the chart.',
+      'There is analytics data hidden somewhere in the backend. Find it using AI, then visualise it with a chart.',
+    learning:
+      'AI isn\'t just a code generator — it\'s an explorer. You can point it at an unfamiliar codebase and ask "what\'s here?" It can also choose and integrate tools on your behalf.',
     href: '/exercises/analytics-chart',
     icon: <PieChart size={24} />,
     difficulty: 'Intermediate',
     difficultyVariant: 'warning',
-    tasks: [
-      { label: 'Discover and fetch data from the analytics API endpoint', done: false },
-      { label: 'Choose and install a charting library', done: false },
-      { label: 'Render the analytics data as a chart', done: false },
-    ],
+  },
+  {
+    number: 4,
+    title: 'Stretch',
+    description:
+      'Go back to the exercises you\'ve completed and make them better. Clean up, add new features, and build a Command Centre that brings everything together.',
+    learning:
+      'AI can refactor and improve code it wrote earlier just as easily as writing it the first time. You\'ll also see how it handles cross-cutting changes that touch multiple parts of the application.',
+    href: '/exercises/stretch',
+    icon: <Zap size={24} />,
+    difficulty: 'Advanced',
+    difficultyVariant: 'danger',
   },
 ];
 
 const ExerciseCard = ({ exercise }: { exercise: Exercise }) => {
-  const completedCount = exercise.tasks.filter((t) => t.done).length;
-  const totalCount = exercise.tasks.length;
-
   return (
     <Card className="mb-3">
       <Card.Body>
@@ -97,29 +87,11 @@ const ExerciseCard = ({ exercise }: { exercise: Exercise }) => {
               <Badge bg="" className={`badge-subtle-${exercise.difficultyVariant}`}>
                 {exercise.difficulty}
               </Badge>
-              {completedCount === totalCount && totalCount > 0 && (
-                <Badge bg="success" className="ms-2">
-                  Complete
-                </Badge>
-              )}
             </div>
             <p className="text-muted mb-2">{exercise.description}</p>
-
-            <ul className="list-unstyled mb-2">
-              {exercise.tasks.map((task, i) => (
-                <li key={i} className="d-flex align-items-start mb-1">
-                  {task.done ? (
-                    <CheckCircle size={16} className="text-success me-2 mt-1 flex-shrink-0" />
-                  ) : (
-                    <Circle size={16} className="text-muted me-2 mt-1 flex-shrink-0" />
-                  )}
-                  <span className={task.done ? 'text-muted text-decoration-line-through' : ''}>
-                    {task.label}
-                  </span>
-                </li>
-              ))}
-            </ul>
-
+            <p className="mb-2" style={{ fontSize: '0.9rem' }}>
+              <strong>What you'll learn:</strong> {exercise.learning}
+            </p>
             <Link to={exercise.href} className="btn btn-primary btn-sm">
               Go to Exercise
             </Link>
