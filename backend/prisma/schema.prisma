@@ -44,6 +44,29 @@ model ExampleTask {
   updatedAt DateTime @updatedAt
 }
 
+model ParkingZone {
+  id   String       @id @default(uuid())
+  name String       @unique
+  bays ParkingBay[]
+}
+
+enum BayStatus {
+  AVAILABLE
+  OCCUPIED
+}
+
+model ParkingBay {
+  id          String      @id @default(uuid())
+  bayNumber   Int
+  status      BayStatus   @default(AVAILABLE)
+  driverName  String?
+  vehicleReg  String?
+  zone        ParkingZone @relation(fields: [zoneId], references: [id])
+  zoneId      String
+
+  @@unique([zoneId, bayNumber])
+}
+
 model MonthlyAnalytics {
   id              Int @id @default(autoincrement())
   month           Int // 1 for January, 12 for December
@@ -53,4 +76,17 @@ model MonthlyAnalytics {
   totalVisits     Int // Total visits for the month
 
   @@unique([month, year]) // Ensure only one entry per month/year combination
+}
+
+model MelbourneSensor {
+  id             String    @id @default(uuid())
+  kerbsideId     Int       @unique
+  zoneNumber     Int
+  lat            Float
+  lon            Float
+  status         String    // "Present" | "Unoccupied"
+  occupancySince DateTime? // set when status transitions to Present
+  lastUpdated    DateTime
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 } 

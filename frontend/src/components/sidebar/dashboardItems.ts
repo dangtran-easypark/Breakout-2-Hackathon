@@ -71,6 +71,11 @@ const exercisesSection = [
         href: "/exercises/analytics-chart",
         title: "Analytics Chart",
       },
+      {
+        href: "/exercises/melbourne-parking",
+        title: "Melbourne Parking",
+        icon: MapPin,
+      },
     ],
   },
 ] as unknown as SidebarItemsType[];

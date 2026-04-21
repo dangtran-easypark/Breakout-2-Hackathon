@@ -12,17 +12,18 @@ interface SidebarProps {
     pages: SidebarItemsType[];
   }[];
   open?: boolean;
-  showFooter?: boolean;
 }
 
-const Sidebar = ({ items, showFooter = true }: SidebarProps) => {
+const Sidebar = ({ items }: SidebarProps) => {
   const { isOpen } = useSidebar();
 
   return (
     <nav className={`sidebar ${!isOpen ? "collapsed" : ""}`}>
       <div className="sidebar-content">
           <a className="sidebar-brand" href="/">
-            <Logo /> <span className="align-middle me-3">AI Learning</span>
+            <div style={{ background: "#fff", borderRadius: 8, padding: "8px 16px", display: "inline-flex" }}>
+              <Logo style={{ width: "140px", height: "auto" }} />
+            </div>
           </a>
 
           <SidebarNav items={items} />

@@ -74,7 +74,7 @@ const ExerciseCard = ({ exercise }: { exercise: Exercise }) => {
           <Col xs="auto" className="pe-0">
             <div
               className="d-flex align-items-center justify-content-center rounded-circle bg-primary text-white"
-              style={{ width: 48, height: 48 }}
+              style={{ width: 56, height: 56 }}
             >
               {exercise.icon}
             </div>
@@ -119,7 +119,7 @@ const HomePage = () => {
               will do the implementation for you.
             </p>
 
-            <div className="rounded p-3 mb-3" style={{ background: '#d1e7dd' }}>
+            <div className="rounded p-3 mb-3" style={{ background: '#f5e8f7' }}>
               <strong>How it works:</strong>
               <ol className="mb-0 mt-1">
                 <li>Click on an exercise below to see its tasks.</li>
@@ -130,7 +130,7 @@ const HomePage = () => {
               </ol>
             </div>
 
-            <div className="rounded p-3 mb-0" style={{ background: '#cfe2ff' }}>
+            <div className="rounded p-3 mb-0" style={{ background: '#ede0f0' }}>
               <strong>What you'll learn:</strong> You can build, extend, and explore software
               without understanding the codebase or the technology that powers it. Across the
               exercises you'll see that AI can modify existing code, build entire features from

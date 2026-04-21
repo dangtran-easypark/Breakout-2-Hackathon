@@ -10,7 +10,7 @@ $font-family-sans-serif: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI
 $font-weight-light: 300 !default;
 $font-weight-normal: 400 !default;
 $font-weight-bold: 500 !default;
-$font-size-base: .825rem !default;
+$font-size-base: .875rem !default;
 $font-size-lg: .95rem !default;
 $font-size-sm: .75rem !default;
 $headings-font-weight: 500 !default;
@@ -58,7 +58,7 @@ $transition-base: all .35s ease-in-out !default;
 // Theme colors
 $blue: 			#3F80EA !default;
 $indigo:	 	#6610f2 !default;
-$purple: 		#6f42c1 !default;
+$purple: 		#5F016F !default;
 $pink:		 	#e83e8c !default;
 $red: 			#d9534f !default;
 $orange: 		#fd7e14 !default;
@@ -79,7 +79,7 @@ $gray-800: #020202 !default;
 $gray-900: #212529 !default;
 $black: #000 !default;
 
-$primary:        $blue !default;
+$primary:        $purple !default;
 $primary-subtle: lighten($primary, 15%) !default;
 $secondary:      $gray-700 !default;
 $success:        $green !default;
@@ -161,14 +161,14 @@ $progress-height-sm: .5rem !default;
 $progress-height-lg: 1.5rem !default;
 
 // Shadows
-$box-shadow-sm:    0 0.05rem 0.2rem rgba(0, 0, 0, .05) !default;
-$box-shadow:       0 0.1rem 0.2rem rgba(0, 0, 0, .05) !default;
-$box-shadow-lg:    0 0.2rem 0.2rem rgba(0, 0, 0, .05) !default;
+$box-shadow-sm:    0 1px 2px rgba(0, 0, 0, .06) !default;
+$box-shadow:       0 1px 3px rgba(0, 0, 0, .08), 0 1px 2px rgba(0, 0, 0, .06) !default;
+$box-shadow-lg:    0 4px 6px -1px rgba(0, 0, 0, .07), 0 2px 4px -1px rgba(0, 0, 0, .05) !default;
 
 // Border radius
-$border-radius-sm: .1rem !default;
-$border-radius:    .2rem !default;
-$border-radius-lg: .3rem !default;
+$border-radius-sm: .25rem !default;
+$border-radius:    .5rem !default;
+$border-radius-lg: .75rem !default;
 
 // Navbar
 $navbar-padding-y: $spacer*0.875 !default;
@@ -229,12 +229,12 @@ $dropdown-item-padding-x: 1.5rem !default;
 
 // Cards
 $card-bg: var(--#{$prefix}secondary-bg) !default;
-$card-border-radius: .25rem !default;
+$card-border-radius: .625rem !default;
 $card-inner-border-radius: $card-border-radius !default;
 $card-border-width: 0 !default;
 $card-border-color: transparent !default;
 $card-cap-bg: var(--#{$prefix}secondary-bg) !default;
-$card-shadow: 0 0 .875rem 0 rgba($dark, 0.05) !default;
+$card-shadow: 0 4px 6px -1px rgba($dark, 0.07), 0 2px 4px -1px rgba($dark, 0.05) !default;
 $card-title-font-weight: $font-weight-bold !default;
 $card-title-color: var(--#{$prefix}emphasis-color) !default;
 $card-spacer-y: $spacer*1.25 !default;
@@ -262,8 +262,8 @@ $offcanvas-bg-color: var(--#{$prefix}secondary-bg) !default;
 $sidebar-width: 260px !default;
 $sidebar-transition: margin-left .35s ease-in-out, left .35s ease-in-out, margin-right .35s ease-in-out, right .35s ease-in-out !default;
 $sidebar-bg: (
-  "dark": #293042,
-  "colored": #2A64C1,
+  "dark": #1A0020,
+  "colored": #5F016F,
   "light": $white
 ) !default;
   
@@ -413,8 +413,8 @@ $sidebar-cta-color: (
 ) !default;
 
 $sidebar-cta-bg: (
-  "dark": #{lighten(#293042, 5%)},
-  "colored": #{lighten(#2A64C1, 3%)},
+  "dark": #{lighten(#1A0020, 5%)},
+  "colored": #{lighten(#5F016F, 3%)},
   "light": #{darken($white, 3%)}
 ) !default;
 

@@ -4,6 +4,8 @@ import cors from 'cors';
 // Import routes
 import exerciseTaskRoutes from './routes/exerciseTask.routes';
 import analyticsRoutes from './routes/analytics.routes';
+import parkingRoutes from './routes/parking.routes';
+import melbourneRoutes from './routes/melbourne.routes';
 
 export function createApp() {
   const app = express();
@@ -19,6 +21,8 @@ export function createApp() {
   // API Routes
   app.use('/api/exercises/tasks', exerciseTaskRoutes);
   app.use('/api/analytics', analyticsRoutes);
+  app.use('/api/parking', parkingRoutes);
+  app.use('/api/melbourne', melbourneRoutes);
 
   // Health Check
   app.get('/health', (req: Request, res: Response) => {

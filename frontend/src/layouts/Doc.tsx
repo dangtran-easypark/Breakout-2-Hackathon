@@ -18,7 +18,7 @@ interface DocProps {
 const Doc: React.FC<DocProps> = ({ children }) => (
   <React.Fragment>
     <Wrapper>
-      <Sidebar items={docItems} showFooter={false} />
+      <Sidebar items={docItems} />
       <Main>
         <NavbarMinimal />
         <Content>

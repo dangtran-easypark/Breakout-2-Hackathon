@@ -159,14 +159,9 @@ a.sidebar-link {
   }
 
   svg {
-    @include sidebar-theme("fill", $sidebar-brand-icon-color);
-    height: 24px;
-    width: 24px;
-    margin-right: 0.15rem;
-
-    path:first-child {
-      @include sidebar-theme("fill", $sidebar-brand-icon-top-color);
-    }
+    height: auto;
+    width: auto;
+    margin-right: 0;
   }
 }
 
