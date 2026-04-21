@@ -26,7 +26,7 @@ interface CarPark {
 }
 
 const CARPARK_COLOURS: Record<CarPark['brand'], string> = {
-  wilson:     '#1d4ed8',
+  wilson:     '#dc2626',
   first:      '#ea580c',
   nationwide: '#0891b2',
 };
@@ -424,9 +424,9 @@ const MelbourneParkingMap: React.FC = () => {
         <button
           onClick={() => setShowCarParks(v => !v)}
           style={{
-            background: showCarParks ? '#1e3a5f' : 'transparent',
-            border: '1.5px solid #1d4ed8',
-            color: showCarParks ? '#fff' : '#1d4ed8',
+            background: showCarParks ? '#7f1d1d' : 'transparent',
+            border: '1.5px solid #dc2626',
+            color: showCarParks ? '#fff' : '#dc2626',
             borderRadius: 6, padding: '5px 14px',
             fontWeight: 600, fontSize: '0.78rem', cursor: 'pointer',
             marginLeft: 8,
