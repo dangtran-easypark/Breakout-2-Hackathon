@@ -482,7 +482,12 @@ const MelbourneParkingMap: React.FC = () => {
           )}
 
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginLeft: 8 }}>
-            {snapshots.slice(0, 8).map(snap => (
+            {snapshots.reduce<SnapshotMeta[]>((acc, snap) => {
+              const last = acc[acc.length - 1];
+              const diff = last ? Math.abs(new Date(snap.capturedAt).getTime() - new Date(last.capturedAt).getTime()) : Infinity;
+              if (diff >= 5 * 60 * 1000) acc.push(snap);
+              return acc;
+            }, []).slice(0, 12).map(snap => (
               <button
                 key={snap.id}
                 onClick={() => { setSelectedSnapshot(snap); setPickerValue(toDatetimeLocal(new Date(snap.capturedAt))); }}
