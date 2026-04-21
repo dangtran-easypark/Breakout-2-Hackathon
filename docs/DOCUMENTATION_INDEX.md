@@ -6,11 +6,20 @@ Quick reference guide to all documentation in this project.
 
 - [**README.md**](/README.md) - Project overview and quick start
 - [**QUICKSTART.md**](/docs/QUICKSTART.md) - Detailed setup instructions
+- [**BUILD.md**](/docs/BUILD.md) - Build, production deployment, and CI/CD checklist
 - [**ENVIRONMENT_VARIABLES.md**](/docs/ENVIRONMENT_VARIABLES.md) - Environment configuration guide
+
+## Testing
+
+- [**TESTING.md**](/docs/TESTING.md) - Running tests, writing new tests, manual API test scripts, smoke test shell script
+
+## Operations & Maintenance
+
+- [**MAINTENANCE.md**](/docs/MAINTENANCE.md) - Melbourne parking system: background services, external APIs, database growth, runbook
 
 ## API & Database
 
-- [**API_REFERENCE.md**](/docs/API_REFERENCE.md) - Complete API endpoint documentation
+- [**API_REFERENCE.md**](/docs/API_REFERENCE.md) - Complete API endpoint documentation (Tasks, Melbourne Parking, Analytics, Parking)
 - [**DATABASE_SCHEMA.md**](/docs/DATABASE_SCHEMA.md) - Database models and relationships
 
 ## Development Processes
