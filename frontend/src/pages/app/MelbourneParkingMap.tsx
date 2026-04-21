@@ -236,7 +236,7 @@ const MelbourneParkingMap: React.FC = () => {
 
   // Weather — load once then every 10 minutes
   useEffect(() => {
-    const load = () => fetchApi<WeatherData>('/melbourne/weather').then(d => setWeather(d)).catch(() => {});
+    const load = () => fetchApi<WeatherData>('/melbourne/weather').then(d => setWeather(d ?? null)).catch(() => {});
     load();
     const id = setInterval(load, 600_000);
     return () => clearInterval(id);
@@ -277,6 +277,14 @@ const MelbourneParkingMap: React.FC = () => {
   return (
     <React.Fragment>
       <Helmet title="Melbourne Parking" />
+      {/* Escape content padding (2.5rem / 2.5rem / 1.5rem) and fill viewport below navbar (3.5rem) */}
+      <div style={{
+        margin: '-2.5rem -2.5rem -1.5rem',
+        height: 'calc(100vh - 3.5rem)',
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'hidden',
+      }}>
 
       {/* ── Weather strip ── */}
       {weather && (
@@ -494,7 +502,7 @@ const MelbourneParkingMap: React.FC = () => {
       )}
 
       {/* ── Resizable split: map + priority panel ── */}
-      <div style={{ display: 'flex', height: 'calc(100vh - 90px)', overflow: 'hidden' }}>
+      <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
 
         {/* Left pane — map */}
         <div style={{ flex: 1, position: 'relative', minWidth: 0 }}>
@@ -649,6 +657,8 @@ const MelbourneParkingMap: React.FC = () => {
         </div>
 
       </div>
+
+      </div>{/* end full-height wrapper */}
     </React.Fragment>
   );
 };
